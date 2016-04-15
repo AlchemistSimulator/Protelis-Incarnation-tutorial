@@ -1,0 +1,15 @@
+incarnation: sapere
+
+# Link nodes separated by at most 0.5 space units
+network-model:
+  type: EuclideanDistance
+  parameters: [0.5]
+  
+displacements:
+  - in:
+      # Uses the class it.unibo.alchemist.loader.displacements.Circle
+      type: Circle
+      # 10000 nodes, displaced in a circle with center in (0, 0) and radius 10
+      parameters: [10000, 0, 0, 10]
+
+# Try the same experiments of the previous step!
