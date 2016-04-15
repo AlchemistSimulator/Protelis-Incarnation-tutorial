@@ -1,0 +1,12 @@
+incarnation: protelis
+
+network-model:
+  type: EuclideanDistance
+  parameters: [0.5]
+  
+displacements:
+  - in:
+      # Regular grid of nodes
+      type: Grid
+      # Starting from (-5, -5), ending in (5, 5), with nodes every (0.25, 0.25) and no randomness
+      parameters: [-5, -5, 5, 5, 0.25, 0.25, 0, 0]
