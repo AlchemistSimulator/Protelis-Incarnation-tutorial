@@ -63,5 +63,10 @@ In order to use such interface, consider the following command list:
 | E            | in select mode | Enters edit mode (to manually change node contents)                   |
 
 
+## Eclipse users
+
+This project includes the eclipse configuration files and can be imported directly in the IDE.
+Use File -> Import -> Git -> Import project from Git and paste the address of this repository to start cloning.
+
 
 [Gradle]: http://gradle.org/
