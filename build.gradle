@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories { mavenCentral() }
+
+dependencies {
+	compile("it.unibo.alchemist:alchemist:$alchemistVersion") {
+		exclude module: 'org.eclipse.xtext.dependencies'
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/protelis'
+		}
+	}
+}
+
+task runAlchemist(type: JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+	main = 'it.unibo.alchemist.Alchemist'
+	args("-y", "src/main/yaml/${simulation}.yml", "-g", "effects/${simulation}.aes")
+}
+runAlchemist.dependsOn(compileJava)
+
+defaultTasks('runAlchemist')
