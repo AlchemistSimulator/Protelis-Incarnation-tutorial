@@ -5,12 +5,17 @@ This tutorial includes a series of exercises of increasing complexity that showc
 
 ## How to launch
 
+### Prerequisites
+
+The only prerequisite is a working version of Java.
+
 ### Using Gradle
 
 The easiest way to launch the examples is by relying on the pre-configured [Gradle][Gradle] build script. It will automatically download all the required libraries, set up the environment, and execute the simulator via command line for you.
 As first step, select the example you want to run by editing the `gradle.properties` file. After `simulation = ` write the name of the file you want Alchemist to use, without the `.yml` extension.
-If an Alchemist Graphics Stack file with the same name is present in the `effects` folder, then it will be loaded as default graphics file.
-Now, you are ready to launch it. Open a terminal and move to the project root folder, then on UNIX:
+Alchemist uses so called "Alchemist Graphics Stack files" (`.aes` extension) to nicely paint the nodes. If a `.aes` file is with the same name of the YAML simulation file is found in the `effects` folder, then it will be loaded as default graphics file.
+As first step, use `git` to locally clone this repository.
+In order to launch, open a terminal and move to the project root folder, then on UNIX:
 ```bash
 ./gradlew runAlchemist
 ```
