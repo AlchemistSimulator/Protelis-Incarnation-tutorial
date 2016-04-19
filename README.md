@@ -38,12 +38,19 @@ java -jar alchemist-redist-VERSION.jar --help
 (remember to substitute VERSION with the alchemist version you actually have downloaded)
 
 Suppose that you have copied such jar in the project root folder, and you want to launch the file `foo.yml` located in `src/main/yaml` using the effects file `effects/bar.aes`. You can do so by running:
-
 ```bash
 java -jar alchemist-redist-VERSION.jar -y src/main/yaml/foo.yml -g effects/bar.aes
 ```
-
-
+If your YAML simulation file refers to an external protelis resource, that should be located in the classpath to get correctly loaded.
+In this case, you may want to manually control the classpath to make sure everything is correctly considered.
+Let's suppose that you store your Protelis modules structure in a `src/main/protelis` folder located in the root project folder. In this case you may want to issue:
+```bash
+java -cp alchemist-redist-VERSION.jar:src/main/protelis it.unibo.alchemist.Alchemist -y src/main/yaml/foo.yml -g effects/bar.aes
+```
+If you are running Alchemist on Windows and using the DOS command interpreter, be wary that that the colon must get substituted by a semicolon:
+```bash
+java -cp alchemist-redist-VERSION.jar;src/main/protelis it.unibo.alchemist.Alchemist -y src/main/yaml/foo.yml -g effects/bar.aes
+```
 
 ## Graphical interface shortcuts
 
