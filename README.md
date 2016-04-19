@@ -13,7 +13,7 @@ The only prerequisite is a working version of Java.
 
 The easiest way to launch the examples is by relying on the pre-configured [Gradle][Gradle] build script. It will automatically download all the required libraries, set up the environment, and execute the simulator via command line for you.
 As first step, select the example you want to run by editing the `gradle.properties` file. After `simulation = ` write the name of the file you want Alchemist to use, without the `.yml` extension.
-Alchemist uses so called "Alchemist Graphics Stack files" (`.aes` extension) to nicely paint the nodes. If a `.aes` file is with the same name of the YAML simulation file is found in the `effects` folder, then it will be loaded as default graphics file.
+Alchemist uses so called "Alchemist Graphics Stack files" (`.aes` extension) to nicely paint the nodes. If a `.aes` file is with the same name of the YAML simulation file is found in the `effects` folder, then it will be loaded as default graphics file. If none is found, Alchemist will be started with the default effects set (you can always fiddle with the rendering from within the simulator).
 As first step, use `git` to locally clone this repository.
 In order to launch, open a terminal and move to the project root folder, then on UNIX:
 ```bash
@@ -71,6 +71,7 @@ In order to use such interface, consider the following command list:
 ## Eclipse users
 
 This project includes the eclipse configuration files and can be imported directly in the IDE.
+The usage of Gradle Buildship is recommended (it is shipped with Eclipse Mars and newer, and it is available in the Eclipse Marketplace anyway).
 Use File -> Import -> Git -> Import project from Git and paste the address of this repository to start cloning.
 
 
