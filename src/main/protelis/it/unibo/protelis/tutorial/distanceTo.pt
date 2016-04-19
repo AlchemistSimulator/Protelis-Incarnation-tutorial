@@ -1,0 +1,17 @@
+module it:unibo:protelis:tutorial:distanceTo
+
+def myPosition() {
+	self.getDevicePosition()
+}
+
+def nbrRange() {
+	nbr(myPosition()).getDistanceTo(myPosition())
+}
+
+rep (d <- 100) {
+	mux (env.has("source")) {
+		0
+	} else {
+		minHood(nbr(d) + nbrRange())
+	}
+}

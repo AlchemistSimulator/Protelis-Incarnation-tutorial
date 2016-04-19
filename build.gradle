@@ -8,16 +8,9 @@ dependencies {
 	}
 }
 
-sourceSets {
-	main {
-		java {
-			srcDir 'src/main/protelis'
-		}
-	}
-}
-
 task runAlchemist(type: JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
+	classpath 'src/main/protelis'
 	main = 'it.unibo.alchemist.Alchemist'
 	args("-y", "src/main/yaml/${simulation}.yml", "-g", "effects/${simulation}.aes")
 }
