@@ -17,6 +17,11 @@ gradient: &gradient
         1
       }
       aFunction() * self.nextRandomDouble()
+  # This line enables sending the result of the computation to neighbors.
+  # It is mandatory, and it allows a fine grained control on the timing, in
+  # case network lag simulation is required. By default, it sends immediately
+  # after execution, in no time.
+  - program: send
 
 displacements:
   - in:
