@@ -1,0 +1,31 @@
+incarnation: protelis
+
+network-model:
+  type: EuclideanDistance
+  parameters: [0.5]
+
+# Let's use the YAML variables to isolate the behavior definition
+# It is not mandatory.
+gradient: &gradient
+  # Defines the frequency at which the program will be executed.
+  # If no explicit class is specified, by defaults it uses a Dirac Comb.
+  - time-distribution: 1
+    # The Protelis program can be written directly here
+    # The Protelis syntax won't be covered by this tutorial
+    program: >
+      def aFunction() {
+        1
+      }
+      aFunction() * self.nextRandomDouble()
+
+displacements:
+  - in:
+      type: Grid
+      parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]
+    programs:
+      # Reference to the "gradient" list of programs
+      - *gradient
+
+# Press P to launch the simulation (seizure warning!)
+# Use the left and right arrow keys to speed up or slow down the simulation
+# Press R to sync the simulation with real time
