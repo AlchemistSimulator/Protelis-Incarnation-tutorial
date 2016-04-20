@@ -28,7 +28,7 @@ Note that the first launch will be rather slow, since Gradle will download all t
 
 ### Using the redistributable jar file
 
-If you got the redistributable, runnable Alchemist jar file, you can use the alchemist command line to execute the provided simulations.
+If you got the redistributable, runnable Alchemist jar file (download it [here][Alchemist releases], you can use the alchemist command line to execute the provided simulations.
 
 To learn which commands the alchemist CLI offers, use:
 
@@ -82,4 +82,5 @@ The usage of Gradle Buildship is recommended (it is shipped with Eclipse Mars an
 Use File -> Import -> Git -> Import project from Git and paste the address of this repository to start cloning.
 
 
+[Alchemist releases]: https://github.com/AlchemistSimulator/Alchemist/releases
 [Gradle]: http://gradle.org/
