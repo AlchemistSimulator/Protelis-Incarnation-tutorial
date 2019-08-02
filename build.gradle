@@ -8,12 +8,25 @@ dependencies {
 	}
 }
 
+task classpathJar(type: Jar) {
+    archiveName = "classpath.jar"
+    doFirst {
+        manifest {
+            attributes "Class-Path": files(configurations.runtimeClasspath).collect { name ->
+                name.toURI()
+            }.join(" ")
+        }
+    }
+}
+
 task runAlchemist(type: JavaExec) {
-	classpath = sourceSets.main.runtimeClasspath
+      // clear up the classpath because the launcher jar has it.
+    classpath = files(classpathJar.archivePath, sourceSets.main.java.outputDir)
 	classpath 'src/main/protelis'
 	main = 'it.unibo.alchemist.Alchemist'
 	args("-y", "src/main/yaml/${simulation}.yml", "-g", "effects/${simulation}.aes")
 }
 runAlchemist.dependsOn(compileJava)
+runAlchemist.dependsOn(classpathJar)
 
 defaultTasks('runAlchemist')
