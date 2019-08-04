@@ -2,7 +2,7 @@ incarnation: protelis
 
 # Link nodes separated by at most 0.5 space units
 network-model:
-  type: EuclideanDistance
+  type: ConnectWithinDistance
   parameters: [0.5]
   
 displacements:
