@@ -1,11 +1,25 @@
+buildscript {}
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.3.41"
+}
 apply plugin: 'java'
 
 repositories { mavenCentral() }
+
+sourceSets {
+    test {
+        resources {
+            srcDir "src/main/protelis"
+        }
+    }
+}
 
 dependencies {
 	compile("it.unibo.alchemist:alchemist:$alchemistVersion") {
 		exclude module: 'org.eclipse.xtext.dependencies'
 	}
+    testImplementation "io.kotlintest:kotlintest-runner-junit5:$junitVersion"
 }
 
 task classpathJar(type: Jar) {
@@ -30,3 +44,7 @@ runAlchemist.dependsOn(compileJava)
 runAlchemist.dependsOn(classpathJar)
 
 defaultTasks('runAlchemist')
+
+test {
+    useJUnitPlatform()
+}
