@@ -29,7 +29,7 @@ class RunSimulationTest<T : Any?> : StringSpec() {
                 }) }
                 .forEach {
                     it.second.waitFor(Status.TERMINATED, 0, TimeUnit.MILLISECONDS)
-                    assert(it.second.error.isEmpty) { "Error in simulation of: ${it.second.error.get().message.orEmpty()}" }
+                    assert(it.second.error.isEmpty()) { "Error in simulation of: ${it.second.error.get().message.orEmpty()}" }
                 }
         }
     }
