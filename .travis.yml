@@ -22,7 +22,6 @@ env:
   matrix:
     - *reference_jdk
     - JDK="adopt@1.12.33-0"
-    - JDK="adopt@1.8.222-10"
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
