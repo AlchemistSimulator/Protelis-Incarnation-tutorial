@@ -9,15 +9,17 @@ import java.util.concurrent.TimeUnit
 
 class RunSimulationTest<T : Any?> : StringSpec() {
 
-    val directorySimulation = "src/main/yaml"
-    val simulationExtension = ".yml"
-    val runForSimulation = 5
+    companion object {
+        const val directorySimulation = "src/main/yaml"
+        const val simulationExtension = ".yml"
+        const val runForSimulation = 5
+    }
 
     init {
-        val listOfSimulationPath = File(directorySimulation).walk().filter { it.isFile }.toList()
+        val listOfSimulationPaths = File(directorySimulation).walk().filter { it.isFile }.toList()
 
         "extension of configuration files should be $simulationExtension" {
-            listOfSimulationPath.forEach{ it.shouldHaveExtension(simulationExtension) }
+            listOfSimulationPaths.forEach{ it.shouldHaveExtension(simulationExtension) }
         }
 
         "run simulations not should throw exception" {
@@ -29,7 +31,7 @@ class RunSimulationTest<T : Any?> : StringSpec() {
                 }) }
                 .forEach {
                     it.second.waitFor(Status.TERMINATED, 0, TimeUnit.MILLISECONDS)
-                    assert(it.second.error.isEmpty()) {
+                    assert(it.second.error.isEmpty) {
                         "Error in simulation of: ${it.second.error.get().message.orEmpty()}"
                     }
                 }
