@@ -1,7 +1,7 @@
 reference_jdk: &reference_jdk
-                 'JDK="adopt@1.11.28-0"'
+  'JDK="adopt@1.11.28-0"'
 reference_os: &reference_os
-                'linux'
+  'linux'
 language: bash
 git:
   depth: false
