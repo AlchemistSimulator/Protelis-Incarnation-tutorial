@@ -5,6 +5,7 @@ import it.unibo.alchemist.core.interfaces.Status
 import it.unibo.alchemist.loader.YamlLoader
 import it.unibo.alchemist.model.implementations.positions.Euclidean2DPosition
 import java.io.File
+import it.unibo.alchemist.model.implementations.times.DoubleTime
 import java.util.concurrent.TimeUnit
 
 class RunSimulationTest<T : Any?> : StringSpec() {
@@ -12,7 +13,7 @@ class RunSimulationTest<T : Any?> : StringSpec() {
     companion object {
         const val directorySimulation = "src/main/yaml"
         const val simulationExtension = ".yml"
-        const val simulationSteps = 1000L
+        const val simulationTime : Double = 10.0
     }
 
     init {
@@ -25,7 +26,7 @@ class RunSimulationTest<T : Any?> : StringSpec() {
         "run simulations not should throw exception" {
             listOfSimulationPaths
                 .map { Pair(it, YamlLoader(it.inputStream()).getDefault<T, Euclidean2DPosition>()) }
-                .map { Pair(it.first, Engine(it.second, simulationSteps).also {
+                .map { Pair(it.first, Engine(it.second, DoubleTime(simulationTime)).also {
                     it.play()
                     it.run()
                 }) }
