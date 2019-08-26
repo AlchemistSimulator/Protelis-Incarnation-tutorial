@@ -28,7 +28,7 @@ displacements:
       # This will be the sensor name
         molecule: value
       # This will be fed to the interpreter, evaluated to the PI value, then bound to the sensor
-        concentration: pi
+        concentration: PI
       - in:
           type: Rectangle
           parameters: [-6, -6, 2, 2]
@@ -38,8 +38,8 @@ displacements:
       # Handle with care.
         concentration: >
           import java.lang.Math.random
-          random() * pi
-        
+          random() * PI
+
 
 notes: |
   Note that in the provided effect stack only the nodes containing "hello" are marked visible.
