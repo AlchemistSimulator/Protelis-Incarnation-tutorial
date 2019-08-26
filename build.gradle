@@ -14,9 +14,7 @@ sourceSets {
 }
 
 dependencies {
-   compile("it.unibo.alchemist:alchemist:$alchemistVersion") {
-       exclude module: 'org.eclipse.xtext.dependencies'
-    }
+    implementation("it.unibo.alchemist:alchemist:$alchemistVersion")
     testImplementation "io.kotlintest:kotlintest-runner-junit5:$junitVersion"
 }
 
