@@ -17,11 +17,11 @@ class RunSimulationTest<T : Any?> : StringSpec() {
         val listOfSimulationPath = File(directorySimulation).walk().filter { it.isFile }.toList()
 
         "extension of configuration files should be $simulationExtension" {
-            listOfSimulationPath.forEach{ it.shouldHaveExtension(simulationExtension)}
+            listOfSimulationPath.forEach{ it.shouldHaveExtension(simulationExtension) }
         }
 
         "run simulations not should throw exception" {
-            listOfSimulationPath
+            listOfSimulationPaths
                 .map { Pair(it, YamlLoader(it.inputStream()).getDefault<T, Euclidean2DPosition>()) }
                 .map { Pair(it.first, Engine(it.second, runForSimulation.toLong()).also {
                     it.play()
@@ -29,7 +29,9 @@ class RunSimulationTest<T : Any?> : StringSpec() {
                 }) }
                 .forEach {
                     it.second.waitFor(Status.TERMINATED, 0, TimeUnit.MILLISECONDS)
-                    assert(it.second.error.isEmpty()) { "Error in simulation of: ${it.second.error.get().message.orEmpty()}" }
+                    assert(it.second.error.isEmpty()) {
+                        "Error in simulation of: ${it.second.error.get().message.orEmpty()}"
+                    }
                 }
         }
     }
