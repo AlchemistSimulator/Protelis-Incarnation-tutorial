@@ -12,7 +12,7 @@ class RunSimulationTest<T : Any?> : StringSpec() {
     companion object {
         const val directorySimulation = "src/main/yaml"
         const val simulationExtension = ".yml"
-        const val runForSimulation = 5
+        const val simulationSteps = 1000L
     }
 
     init {
@@ -25,7 +25,7 @@ class RunSimulationTest<T : Any?> : StringSpec() {
         "run simulations not should throw exception" {
             listOfSimulationPaths
                 .map { Pair(it, YamlLoader(it.inputStream()).getDefault<T, Euclidean2DPosition>()) }
-                .map { Pair(it.first, Engine(it.second, runForSimulation.toLong()).also {
+                .map { Pair(it.first, Engine(it.second, simulationSteps).also {
                     it.play()
                     it.run()
                 }) }
