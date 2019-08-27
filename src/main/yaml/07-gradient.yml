@@ -12,7 +12,7 @@ gradient: &gradient
     # Loading the code as a module within Alchemist
     # In order to run this example, make sure that src/main/protelis is part of
     # your classpath (the Gradle script is already properly configured).
-    program: it:unibo:protelis:tutorial:distanceTo
+    program: org:protelis:tutorial:distanceTo
   - program: send
 
 displacements:

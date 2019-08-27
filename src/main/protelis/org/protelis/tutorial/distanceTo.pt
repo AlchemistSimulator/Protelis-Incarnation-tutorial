@@ -1,4 +1,4 @@
-module it:unibo:protelis:tutorial:distanceTo
+module org:protelis:tutorial:distanceTo
 
 def myPosition() {
 	self.getDevicePosition()
