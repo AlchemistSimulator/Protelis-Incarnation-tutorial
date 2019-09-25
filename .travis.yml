@@ -1,5 +1,5 @@
 reference_jdk: &reference_jdk
-  'JDK="adopt@1.11.28-0"'
+  'JDK="adopt@1.11.0"'
 reference_os: &reference_os
   'linux'
 language: bash
@@ -10,18 +10,14 @@ os:
   - windows
   - *reference_os
 dist: xenial
-stages:
-  - check
-  - test
 env:
   global:
     - TERM=dumb
     - GRAVIS="https://raw.githubusercontent.com/DanySK/Gravis-CI/master/"
     - PUBLISH="false"
-    - OFFICIAL_REPO_SLUG="Placu95/Protelis-Incarnation-tutorial"
   matrix:
     - *reference_jdk
-    - JDK="adopt@1.12.33-0"
+    - JDK="adopt@1.12.0"
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
