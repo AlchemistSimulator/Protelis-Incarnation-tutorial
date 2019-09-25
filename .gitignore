@@ -2,3 +2,4 @@
 /build/
 .metadata/
 .gradle/
+.idea/
