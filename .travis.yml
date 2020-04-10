@@ -1,5 +1,5 @@
 reference_jdk: &reference_jdk
-  'JDK="adopt@1.11.0"'
+  'JDK="adopt@1.11"'
 reference_os: &reference_os
   'linux'
 language: bash
@@ -17,7 +17,9 @@ env:
     - PUBLISH="false"
   matrix:
     - *reference_jdk
-    - JDK="adopt@1.12.0"
+    - JDK="adopt-openj9@1.11"
+    - JDK="adopt-openj9@"
+    - JDK="adopt@"
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
