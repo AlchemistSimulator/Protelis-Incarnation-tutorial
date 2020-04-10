@@ -25,15 +25,17 @@ class RunSimulationTest<T : Any?> : StringSpec() {
 
         "run simulations not should throw exception" {
             listOfSimulationPaths
-                .map { Pair(it, YamlLoader(it.inputStream()).getDefault<T, Euclidean2DPosition>()) }
-                .map { Pair(it.first, Engine(it.second, DoubleTime(simulationTime)).also {
+                .asSequence()
+                .map { YamlLoader(it.inputStream()).getDefault<T, Euclidean2DPosition>() }
+                .map { Engine(it, DoubleTime(simulationTime)) }
+                .onEach {
                     it.play()
                     it.run()
-                }) }
+                }
                 .forEach {
-                    it.second.waitFor(Status.TERMINATED, 0, TimeUnit.MILLISECONDS)
-                    assert(it.second.error.isEmpty) {
-                        "Error in simulation of: ${it.second.error.get().message.orEmpty()}"
+                    it.waitFor(Status.TERMINATED, 0, TimeUnit.MILLISECONDS)
+                    assert(it.error.isEmpty) {
+                        "Error in simulation of: ${it.error.get().message.orEmpty()}"
                     }
                 }
         }

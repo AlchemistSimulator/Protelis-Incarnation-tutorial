@@ -6,7 +6,7 @@ plugins {
 repositories { mavenCentral() }
 
 sourceSets {
-    test {
+    main {
         resources {
             srcDir("src/main/protelis")
         }
@@ -14,29 +14,51 @@ sourceSets {
 }
 
 dependencies {
-    implementation("it.unibo.alchemist:alchemist:${extra["alchemistVersion"].toString()}")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:${extra["junitVersion"].toString()}")
+    implementation("it.unibo.alchemist:alchemist:_")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
 }
 
-val jar by tasks.getting(Jar::class) {
-    archiveName = "classpath.jar"
-    manifest {
-        attributes["Class-Path"] = files(configurations.runtimeClasspath)
-                .map { it.toURI() }
-                .joinToString(" ")
-    }
-}
-val simulation = extra["simulation"].toString()
-tasks.register<JavaExec>("runAlchemist") {
-    dependsOn("compileJava")
-    dependsOn("jar")
-    // clean up the classpath because the launcher jar has it.
-    classpath = files(jar.archivePath)
-    classpath("src/main/protelis")
-    main = "it.unibo.alchemist.Alchemist"
-    args("-y", "src/main/yaml/$simulation.yml", "-g", "effects/$simulation.aes")
+
+val batch: String by project
+val maxTime: String by project
+
+val alchemistGroup = "Run Alchemist"
+/*
+ * This task is used to run all experiments in sequence
+ */
+val runAll by tasks.register<DefaultTask>("runAll") {
+    group = alchemistGroup
+    description = "Launches all simulations"
 }
 
-defaultTasks("runAlchemist")
+/*
+ * Scan the folder with the simulation files, and create a task for each one of them.
+ */
+File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
+        .filter { it.extension == "yml" }
+        .sortedBy { it.nameWithoutExtension }
+        .forEach {
+            val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalize()}") {
+                group = alchemistGroup
+                description = "Launches simulation ${it.nameWithoutExtension}"
+                main = "it.unibo.alchemist.Alchemist"
+                classpath = sourceSets["main"].runtimeClasspath
+                val exportsDir = File("${projectDir.path}/build/exports/${it.nameWithoutExtension}")
+                doFirst {
+                    if (!exportsDir.exists()) {
+                        exportsDir.mkdirs()
+                    }
+                }
+                args("-y", it.absolutePath, "-e", "$exportsDir/${it.nameWithoutExtension}-${System.currentTimeMillis()}")
+                if (System.getenv("CI") == "true" || batch == "true") {
+                    args("-hl", "-t", maxTime)
+                } else {
+                    args("-g", "effects/${it.nameWithoutExtension}.aes")
+                }
+                outputs.dir(exportsDir)
+            }
+            // task.dependsOn(classpathJar) // Uncomment to switch to jar-based cp resolution
+            runAll.dependsOn(task)
+        }
 
 tasks.test { useJUnitPlatform() }
