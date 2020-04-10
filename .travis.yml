@@ -2,34 +2,52 @@ reference_jdk: &reference_jdk
   'JDK="adopt@1.11"'
 reference_os: &reference_os
   'linux'
+
 language: bash
+
 git:
   depth: false
+
 os:
   - osx
   - windows
   - *reference_os
-dist: xenial
+
+stages:
+  - base
+  - test
+
 env:
   global:
     - TERM=dumb
-    - GRAVIS="https://raw.githubusercontent.com/DanySK/Gravis-CI/master/"
-    - PUBLISH="false"
+    - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
+    - GRAVIS="$HOME/gravis"
   matrix:
     - *reference_jdk
     - JDK="adopt-openj9@1.11"
     - JDK="adopt-openj9@"
     - JDK="adopt@"
+
+jobs:
+  exclude:
+    - stage: test
+      os: linux
+      env: *reference_jdk
+  include:
+    - stage: base
+      os: linux
+      env: *reference_jdk
+
 before_install:
-  - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
-  - source .disable-windows-defender.sh
-  - curl "${GRAVIS}.install-jdk-travis.sh" --output .install-jdk-travis.sh
-  - source .install-jdk-travis.sh
+  - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
+  - source $GRAVIS/install-jdk
+
 script:
-  - ./gradlew clean test --parallel
+  - travis_retry ./gradlew check
+
 before_cache:
-  - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
-  - bash .clean_gradle_cache.sh
+  - $GRAVIS/clean-gradle-cache
+
 cache:
   directories:
     - $HOME/.gradle/caches/
