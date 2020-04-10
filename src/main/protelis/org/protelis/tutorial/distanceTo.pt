@@ -5,7 +5,7 @@ def myPosition() {
 }
 
 def nbrRange() {
-	nbr(myPosition()).getDistanceTo(myPosition())
+	nbr(myPosition()).distanceTo(myPosition())
 }
 
 rep (d <- 100) {

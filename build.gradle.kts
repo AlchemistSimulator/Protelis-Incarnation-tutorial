@@ -15,6 +15,8 @@ sourceSets {
 
 dependencies {
     implementation("it.unibo.alchemist:alchemist:_")
+    implementation("it.unibo.alchemist:alchemist-swingui:_")
+    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
 }
 
