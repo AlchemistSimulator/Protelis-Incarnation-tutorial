@@ -1,6 +1,6 @@
 plugins {
     java
-    kotlin("jvm") version "1.3.41"
+    kotlin("jvm")
 }
 
 repositories { mavenCentral() }
@@ -17,7 +17,10 @@ dependencies {
     implementation("it.unibo.alchemist:alchemist:_")
     implementation("it.unibo.alchemist:alchemist-swingui:_")
     implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
+    testImplementation("it.unibo.alchemist:alchemist-euclidean-geometry:_")
+    testImplementation("io.kotest:kotest-runner-junit5:_")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:_")
+
 }
 
 

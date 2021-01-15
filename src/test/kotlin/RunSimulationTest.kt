@@ -1,5 +1,5 @@
-import io.kotlintest.matchers.file.shouldHaveExtension
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.file.shouldHaveExtension
 import it.unibo.alchemist.core.implementations.Engine
 import it.unibo.alchemist.core.interfaces.Status
 import it.unibo.alchemist.loader.YamlLoader

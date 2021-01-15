@@ -1,10 +1,15 @@
-import de.fayard.dependencies.bootstrapRefreshVersionsAndDependencies
+import de.fayard.refreshVersions.bootstrapRefreshVersions
+        import org.danilopianini.VersionAliases.justAdditionalAliases
+        buildscript {
+            repositories {
+                gradlePluginPortal()
+                mavenCentral()
+            }
+            dependencies {
+                classpath("de.fayard.refreshVersions:refreshVersions:0.9.7")
+                classpath("org.danilopianini:refreshversions-aliases:+")
+            }
+        }
+bootstrapRefreshVersions(justAdditionalAliases)
 
 rootProject.name = "protelis-alchemist-tutorial"
-
-buildscript {
-    repositories { gradlePluginPortal() }
-    dependencies.classpath("de.fayard:dependencies:+")
-}
-
-bootstrapRefreshVersionsAndDependencies()
