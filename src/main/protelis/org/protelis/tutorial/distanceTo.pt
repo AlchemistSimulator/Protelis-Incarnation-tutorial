@@ -1,17 +1,11 @@
 module org:protelis:tutorial:distanceTo
 
-def myPosition() {
-	self.getDevicePosition()
-}
+def myPosition() = self.getDevicePosition()
 
-def nbrRange() {
-	nbr(myPosition()).distanceTo(myPosition())
-}
+def nbrRange() = nbr(myPosition()).distanceTo(myPosition())
 
-rep (d <- 100) {
-	mux (env.has("source")) {
-		0
-	} else {
-		minHood(nbr(d) + nbrRange())
-	}
+share (d <- POSITIVE_INFINITY) {
+	// Must be executed outside the 'if' block!
+	let shortestPathViaNeighborhood = foldMin(POSITIVE_INFINITY, d + nbrRange())
+	if (env.has("source")) { 0 } else { shortestPathViaNeighborhood }
 }

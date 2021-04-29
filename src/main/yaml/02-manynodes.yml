@@ -5,11 +5,10 @@ network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
   
-displacements:
-  - in:
-      # Uses the class it.unibo.alchemist.loader.displacements.Circle
-      type: Circle
-      # 10000 nodes, displaced in a circle with center in (0, 0) and radius 10
-      parameters: [10000, 0, 0, 10]
+deployments:
+  # Uses the class it.unibo.alchemist.loader.deployments.Circle
+  type: Circle
+  # 10000 nodes, displaced in a circle with center in (0, 0) and radius 10
+  parameters: [10000, 0, 0, 10]
 
 # Try the same experiments of the previous step!

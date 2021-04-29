@@ -4,44 +4,41 @@ network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
   
-displacements:
-  - in:
-      type: Grid
-      parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]
-    # In the content section, we configure the node sensors
-    contents:
-      # Molecule, in the Protelis incarnation of alchemist, just means "global variable",
-      # or, better suiting the aggregate programming metaphor, sensor name.
-      - molecule: hello
-      # Concentration is the sensor value. Any valid stateless (no rep or nbr) protelis program
-      # can be entered as concentration value. It will be fed to the ProtelisIncarnation, that in
-      # turn will interpret it, extract a result, and inject it in the node.
-      # Note that, if you want to inject a string, you must escape the double quotes!
-        concentration: "\"Hello, world!\""
-      # The `in` key is used to restrict the range where a sensor is injected. If omitted, the
-      # injection will happen in every node. 
-      - in:
-          # Loads an instance of it.unibo.alchemist.loader.shapes.Rectangle
-          type: Rectangle
-          # A square starting from (-1, -1) with sides 2 distance units large
-          parameters: [-1, -1, 2, 2]
-      # This will be the sensor name
-        molecule: value
-      # This will be fed to the interpreter, evaluated to the PI value, then bound to the sensor
-        concentration: PI
-      - in:
-          type: Rectangle
-          parameters: [-6, -6, 2, 2]
-        molecule: value
-      # Java imports and method calls are allowed!
-      # Which mean that yes, you can ruin reproducibility of your simulation in arbitrary ways.
-      # Handle with care.
-        concentration: >
-          import java.lang.Math.random
-          random() * PI
+deployments:
+  type: Grid
+  parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]
+  # In the content section, we configure the node sensors
+  contents:
+    # Molecule, in the Protelis incarnation of alchemist, just means "global variable",
+    # or, better suiting the aggregate programming metaphor, sensor name.
+    - molecule: hello
+    # Concentration is the sensor value. Any valid stateless (no rep or nbr) protelis program
+    # can be entered as concentration value. It will be fed to the ProtelisIncarnation, that in
+    # turn will interpret it, extract a result, and inject it in the node.
+    # Note that, if you want to inject a string, you must escape the double quotes!
+      concentration: "\"Hello, world!\""
+    # The `in` key is used to restrict the range where a sensor is injected. If omitted, the
+    # injection will happen in every node.
+    - in:
+        # Loads an instance of it.unibo.alchemist.loader.shapes.Rectangle
+        type: Rectangle
+        # A square starting from (-1, -1) with sides 2 distance units large
+        parameters: [-1, -1, 2, 2]
+    # This will be the sensor name
+      molecule: value
+    # This will be fed to the interpreter, evaluated to the PI value, then bound to the sensor
+      concentration: PI
+    - in:
+        type: Rectangle
+        parameters: [-6, -6, 2, 2]
+      molecule: value
+    # Java imports and method calls are allowed!
+    # Which mean that yes, you can ruin reproducibility of your simulation in arbitrary ways.
+    # Handle with care.
+      concentration: >
+        random() * PI
 
-
-notes: |
+_notes: |
   Note that in the provided effect stack only the nodes containing "hello" are marked visible.
   Try to modify the variable name, and you'll see all of them disappear (from the graphics, not from
   the simulated environment).

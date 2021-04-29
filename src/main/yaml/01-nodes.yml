@@ -6,19 +6,17 @@ network-model:
   parameters: [5]
   
 # In this section the nodes are described
-displacements:
-  # A list of "in" entries, where each entry defines a group of nodes
-  - in:
-      # Uses the class it.unibo.alchemist.loader.displacements.Point
-      type: Point
-      # Using a constructor taking as input a couple of integers
-      parameters: [0, 0]
-  - in:
-      type: Point
-      parameters: [0, 1]
+deployments:
+  # A list of entries, where each entry defines a group of nodes
+  - # Uses the class it.unibo.alchemist.loader.deployments.Point
+    type: Point
+    # Using a constructor taking as input a couple of integers
+    parameters: [0, 0]
+  - type: Point
+    parameters: [0, 1]
 
-description: |
-  Note that you are free to add as many YAML fields as you like, the simulator will just ignore them.
+_description: |
+  Note that you are free to add as many YAML fields as you like by prefixing them with "_", the simulator will just ignore them.
   In this scenario two nodes are inserted at (0, 0) and (0, 1), both are left empty and unprogrammed.
   Press L to make alchemist show the link between them
   Press M to enable / disable the marker on the closer node
