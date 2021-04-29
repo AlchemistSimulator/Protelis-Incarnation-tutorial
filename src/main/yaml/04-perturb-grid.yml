@@ -4,10 +4,8 @@ network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
   
-displacements:
-  - in:
-      type: Grid
-      # With respect to the previous example, we just ask nodes to be located randomly in a square
-      # with a 0.1 distance units long side, centered in the point where the node was previously placed
-      parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]
-
+deployments:
+  type: Grid
+  # With respect to the previous example, we just ask nodes to be located randomly in a square
+  # with a 0.1 distance units long side, centered in the point where the node was previously placed
+  parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]

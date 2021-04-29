@@ -9,6 +9,7 @@ sourceSets {
     main {
         resources {
             srcDir("src/main/protelis")
+            srcDir("src/main/yaml")
         }
     }
 }
@@ -58,7 +59,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 if (System.getenv("CI") == "true" || batch == "true") {
                     args("-hl", "-t", maxTime)
                 } else {
-                    args("-g", "effects/${it.nameWithoutExtension}.aes")
+                    args("-g", "effects/${it.nameWithoutExtension}.json")
                 }
                 outputs.dir(exportsDir)
             }
@@ -66,4 +67,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             runAll.dependsOn(task)
         }
 
-tasks.test { useJUnitPlatform() }
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
+}
