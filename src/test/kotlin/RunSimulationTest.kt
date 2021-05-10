@@ -3,7 +3,6 @@ import io.kotest.matchers.file.shouldHaveExtension
 import it.unibo.alchemist.core.implementations.Engine
 import it.unibo.alchemist.core.interfaces.Status
 import it.unibo.alchemist.loader.LoadAlchemist
-import it.unibo.alchemist.loader.SimulationModel
 import it.unibo.alchemist.model.implementations.positions.Euclidean2DPosition
 import java.io.File
 import it.unibo.alchemist.model.implementations.times.DoubleTime
