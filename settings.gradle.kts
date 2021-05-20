@@ -6,7 +6,7 @@ import de.fayard.refreshVersions.bootstrapRefreshVersions
                 mavenCentral()
             }
             dependencies {
-                classpath("de.fayard.refreshVersions:refreshVersions:0.9.7")
+                classpath("de.fayard.refreshVersions:refreshVersions:0.10.0")
                 classpath("org.danilopianini:refreshversions-aliases:+")
             }
         }
