@@ -14,6 +14,12 @@ sourceSets {
     }
 }
 
+fun onJava16AndAbove(body: () -> Unit) {
+    if (JavaVersion.current() >= JavaVersion.VERSION_16) {
+        body()
+    }
+}
+
 dependencies {
     implementation("it.unibo.alchemist:alchemist:_")
     implementation("it.unibo.alchemist:alchemist-swingui:_")
@@ -21,7 +27,11 @@ dependencies {
     testImplementation("it.unibo.alchemist:alchemist-euclidean-geometry:_")
     testImplementation("io.kotest:kotest-runner-junit5:_")
     testImplementation("io.kotest:kotest-assertions-core-jvm:_")
-
+    onJava16AndAbove {
+        runtimeOnly("com.google.inject:guice:_")
+        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext:_")
+        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext.xbase:_")
+    }
 }
 
 
@@ -47,6 +57,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalize()}") {
                 group = alchemistGroup
                 description = "Launches simulation ${it.nameWithoutExtension}"
+                onJava16AndAbove {
+                    jvmArgs("--illegal-access=permit")
+                }
                 main = "it.unibo.alchemist.Alchemist"
                 classpath = sourceSets["main"].runtimeClasspath
                 val exportsDir = File("${projectDir.path}/build/exports/${it.nameWithoutExtension}")
