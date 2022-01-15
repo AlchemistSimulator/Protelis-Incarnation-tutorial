@@ -1,5 +1,7 @@
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.beEmpty
 import io.kotest.matchers.file.shouldHaveExtension
+import io.kotest.matchers.shouldNot
 import it.unibo.alchemist.core.implementations.Engine
 import it.unibo.alchemist.core.interfaces.Status
 import it.unibo.alchemist.loader.LoadAlchemist
@@ -8,22 +10,17 @@ import java.io.File
 import it.unibo.alchemist.model.implementations.times.DoubleTime
 import java.util.concurrent.TimeUnit
 
-class RunSimulationTest<T : Any?> : StringSpec() {
-
-    companion object {
-        const val directorySimulation = "src/main/yaml"
-        const val simulationExtension = ".yml"
-        const val simulationTime : Double = 10.0
-    }
-
-    init {
+class RunSimulationTest<T : Any?> : StringSpec(
+    {
         val listOfSimulationPaths = File(directorySimulation).walk().filter { it.isFile }.toList()
+
+        listOfSimulationPaths shouldNot beEmpty()
 
         "extension of configuration files should be $simulationExtension" {
             listOfSimulationPaths.forEach{ it.shouldHaveExtension(simulationExtension) }
         }
 
-        "run simulations not should throw exception" {
+        "simulations should terminate with no error" {
             listOfSimulationPaths
                 .asSequence()
                 .map { LoadAlchemist.from(it).getDefault<T, Euclidean2DPosition>().environment }
@@ -39,5 +36,11 @@ class RunSimulationTest<T : Any?> : StringSpec() {
                     }
                 }
         }
+    }
+) {
+    companion object {
+        const val directorySimulation = "src/main/yaml"
+        const val simulationExtension = ".yml"
+        const val simulationTime : Double = 10.0
     }
 }
