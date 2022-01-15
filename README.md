@@ -2,14 +2,20 @@
 
 This tutorial includes a series of exercises of increasing complexity that showcase the Alchemist simulator's Protelis incarnation.
 
-
 ## How to launch
 
 ### Prerequisites
 
-The only prerequisite is a working version of Java 11 or above.
+The only prerequisite is a Java version compatible with Gradle.
+This project is configured to automatically upgrade the version of Gradle it relies upon,
+so usually the last entry of the [Gradle-Java compatibility matrix](https://docs.gradle.org/current/userguide/compatibility.html) is the one to consider.
+At the time of writing, the minimum required version is Java 8.
 You can verify the version by running `java -version` in a terminal.
-In case you have no Java installed, we suggest to use the latest LTS version from [AdoptOpenJDK](https://adoptopenjdk.net/)
+In case you have no Java installed, we suggest to use the latest LTS version from [AdoptOpenJDK](https://adoptopenjdk.net/).
+
+Note that, internally, the simulator requires Java 11 or above.
+The project is configured to self-provision a compatible Java environment,
+assuming that network connection is available.
 
 ### Using Gradle
 
