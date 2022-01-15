@@ -19,20 +19,10 @@ multiJvm {
     jvmVersionForCompilation.set(11)
 }
 
-fun onJava16AndAbove(body: () -> Unit) {
-    if (JavaVersion.current() >= JavaVersion.VERSION_16) {
-        body()
-    }
-}
-
 // Modules, versions, and bundles are declared in gradle/libs.versions.toml
 dependencies {
     implementation(libs.bundles.alchemist)
     testImplementation(libs.bundles.kotest)
-    onJava16AndAbove {
-        runtimeOnly(libs.guice)
-        runtimeOnly(libs.bundles.xtext)
-    }
 }
 
 val batch: String by project
