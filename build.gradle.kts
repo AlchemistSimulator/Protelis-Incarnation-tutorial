@@ -1,6 +1,5 @@
 plugins {
-    java
-    kotlin("jvm")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 repositories { mavenCentral() }
@@ -20,17 +19,13 @@ fun onJava16AndAbove(body: () -> Unit) {
     }
 }
 
+// Modules, versions, and bundles are declared in gradle/libs.versions.toml
 dependencies {
-    implementation("it.unibo.alchemist:alchemist:_")
-    implementation("it.unibo.alchemist:alchemist-swingui:_")
-    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
-    testImplementation("it.unibo.alchemist:alchemist-euclidean-geometry:_")
-    testImplementation("io.kotest:kotest-runner-junit5:_")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:_")
+    implementation(libs.bundles.alchemist)
+    testImplementation(libs.bundles.kotest)
     onJava16AndAbove {
-        runtimeOnly("com.google.inject:guice:_")
-        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext:_")
-        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext.xbase:_")
+        runtimeOnly(libs.guice)
+        runtimeOnly(libs.bundles.xtext)
     }
 }
 
