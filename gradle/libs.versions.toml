@@ -8,11 +8,8 @@ alchemist = { module = "it.unibo.alchemist:alchemist", version.ref = "alchemist"
 alchemist-swingui = { module = "it.unibo.alchemist:alchemist-swingui", version.ref = "alchemist" }
 alchemist-incarnation-protelis = { module = "it.unibo.alchemist:alchemist-incarnation-protelis", version.ref = "alchemist" }
 alchemist-euclidean-geometry = { module = "it.unibo.alchemist:alchemist-euclidean-geometry", version.ref = "alchemist" }
-guice = "com.google.inject:guice:5.0.1"
 kotest-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
-xtext = { module = "org.eclipse.xtext:org.eclipse.xtext", version.ref = "xtext" }
-xbase = { module = "org.eclipse.xtext:org.eclipse.xtext.xbase", version.ref = "xtext" }
 
 [bundles]
 kotest = ["kotest-junit5", "kotest-assertions-core-jvm"]
@@ -22,7 +19,6 @@ alchemist = [
     "alchemist-incarnation-protelis",
     "alchemist-euclidean-geometry",
 ]
-xtext = ["xtext", "xbase"]
 
 [plugins]
 kotlin-jvm = "org.jetbrains.kotlin.jvm:1.5.31"
