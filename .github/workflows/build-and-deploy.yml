@@ -28,7 +28,7 @@ jobs:
       # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v2.4.0
-      - uses: DanySK/build-check-deploy-gradle-action@1.1.3
+      - uses: DanySK/build-check-deploy-gradle-action@1.2.0
         with:
           check-command: ./gradlew check runAll --parallel
           should-deploy: false
