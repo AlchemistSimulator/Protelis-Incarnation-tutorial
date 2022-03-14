@@ -1,6 +1,6 @@
 [versions]
 alchemist = "14.0.1"
-kotest = "5.2.0"
+kotest = "5.2.1"
 
 [libraries]
 alchemist = { module = "it.unibo.alchemist:alchemist", version.ref = "alchemist" }
