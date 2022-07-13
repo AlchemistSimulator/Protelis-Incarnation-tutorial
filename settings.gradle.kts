@@ -2,7 +2,7 @@ rootProject.name = "protelis-alchemist-tutorial"
 
 plugins {
     id("com.gradle.enterprise") version "3.10.3"
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "1.0.14"
+    id("org.danilopianini.gradle-pre-commit-git-hooks") version "1.0.15"
 }
 
 gradleEnterprise {
