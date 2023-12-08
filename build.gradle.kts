@@ -16,7 +16,7 @@ sourceSets {
 }
 
 multiJvm {
-    jvmVersionForCompilation.set(11)
+    jvmVersionForCompilation.set(17)
 }
 
 // Modules, versions, and bundles are declared in gradle/libs.versions.toml
