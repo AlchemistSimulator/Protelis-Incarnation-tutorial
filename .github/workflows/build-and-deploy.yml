@@ -22,9 +22,9 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows, macos, ubuntu]
+        os: [ windows-2022, macos-12, ubuntu-22.04 ]
       fail-fast: false
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
     steps:
       # Checkout the repository
       - name: Checkout
