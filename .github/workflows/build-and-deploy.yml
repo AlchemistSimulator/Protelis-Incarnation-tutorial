@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  success:
+  build:
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
@@ -33,3 +33,15 @@ jobs:
         with:
           check-command: ./gradlew check runAll --parallel
           should-deploy: false
+  success:
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+    if: >-
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
+    steps:
+      - name: Verify that there were no failures
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
