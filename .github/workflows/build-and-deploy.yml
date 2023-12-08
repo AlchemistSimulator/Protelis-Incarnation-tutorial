@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  Build:
+  success:
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
