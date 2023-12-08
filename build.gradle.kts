@@ -1,3 +1,5 @@
+import org.gradle.configurationcache.extensions.capitalized
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting)
@@ -41,10 +43,12 @@ val runAll by tasks.register<DefaultTask>("runAll") {
  * Scan the folder with the simulation files, and create a task for each one of them.
  */
 File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
+    .orEmpty()
+    .apply { check(isNotEmpty()) }
     .filter { it.extension == "yml" }
     .sortedBy { it.nameWithoutExtension }
     .forEach {
-        val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalize()}") {
+        val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalized()}") {
             javaLauncher.set(
                 javaToolchains.launcherFor {
                     languageVersion.set(JavaLanguageVersion.of(multiJvm.latestJava))
