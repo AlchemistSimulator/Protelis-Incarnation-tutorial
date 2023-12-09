@@ -2,12 +2,12 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.beEmpty
 import io.kotest.matchers.file.shouldHaveExtension
 import io.kotest.matchers.shouldNot
-import it.unibo.alchemist.core.implementations.Engine
-import it.unibo.alchemist.core.interfaces.Status
-import it.unibo.alchemist.loader.LoadAlchemist
-import it.unibo.alchemist.model.implementations.positions.Euclidean2DPosition
+import it.unibo.alchemist.boundary.LoadAlchemist
+import it.unibo.alchemist.core.Engine
+import it.unibo.alchemist.core.Status
+import it.unibo.alchemist.model.positions.Euclidean2DPosition
+import it.unibo.alchemist.model.times.DoubleTime
 import java.io.File
-import it.unibo.alchemist.model.implementations.times.DoubleTime
 import java.util.concurrent.TimeUnit
 
 class RunSimulationTest<T : Any?> : StringSpec(
