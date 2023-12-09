@@ -1,3 +1,6 @@
 incarnation: protelis
 
+launcher:
+  type: SingleRunSwingUI
+
 # An empty world

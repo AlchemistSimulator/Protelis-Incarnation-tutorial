@@ -64,11 +64,22 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                     exportsDir.mkdirs()
                 }
             }
-            args("-y", it.absolutePath, "-e", "$exportsDir/${it.nameWithoutExtension}-${System.currentTimeMillis()}")
+            args("run", it.absolutePath)
             if (System.getenv("CI") == "true" || batch == "true") {
-                args("-hl", "-t", maxTime)
+                args(
+                    "--override",
+                    """
+                    {
+                        launcher: { type: HeadlessSimulationLauncher, parameters: [] },
+                        terminate: { type: AfterTime, parameters: 2 }
+                    }
+                    """.trimIndent()
+                )
             } else {
-                args("-g", "effects/${it.nameWithoutExtension}.json")
+                args(
+                    "--override",
+                    "{ launcher: { parameters: { graphics: \"effects/${it.nameWithoutExtension}.json\" } } }"
+                )
             }
             outputs.dir(exportsDir)
         }

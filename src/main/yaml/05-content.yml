@@ -1,5 +1,8 @@
 incarnation: protelis
 
+launcher:
+  type: SingleRunSwingUI
+
 network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
