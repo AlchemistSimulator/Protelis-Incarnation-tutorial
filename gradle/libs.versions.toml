@@ -21,5 +21,5 @@ alchemist = [
 
 [plugins]
 kotlin-jvm = "org.jetbrains.kotlin.jvm:1.9.22"
-multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.5.5"
+multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.5.8"
 taskTree = "com.dorongold.task-tree:2.1.1"
