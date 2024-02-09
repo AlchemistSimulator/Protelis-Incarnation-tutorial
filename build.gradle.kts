@@ -70,7 +70,6 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                     "--override",
                     """
                     {
-                        launcher: { type: HeadlessSimulationLauncher, parameters: [] },
                         terminate: { type: AfterTime, parameters: 2 }
                     }
                     """.trimIndent()
@@ -78,7 +77,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             } else {
                 args(
                     "--override",
-                    "{ launcher: { parameters: { graphics: \"effects/${it.nameWithoutExtension}.json\" } } }"
+                    "{ monitors: { type: SwingGUI, parameters: { graphics: \"effects/${it.nameWithoutExtension}.json\" } } }"
                 )
             }
             outputs.dir(exportsDir)

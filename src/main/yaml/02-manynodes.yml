@@ -1,8 +1,5 @@
 incarnation: protelis
 
-launcher:
-  type: SingleRunSwingUI
-
 # Link nodes separated by at most 0.5 space units
 network-model:
   type: ConnectWithinDistance

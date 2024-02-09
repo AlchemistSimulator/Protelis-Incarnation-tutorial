@@ -1,10 +1,5 @@
 incarnation: protelis
 
-launcher:
-  type: SingleRunSwingUI
-  parameters:
-    graphics: "effects/07-gradient"
-
 network-model:
   type: ConnectWithinDistance
   parameters: [0.5]

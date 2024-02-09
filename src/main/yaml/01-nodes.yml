@@ -1,8 +1,5 @@
 incarnation: protelis
 
-launcher:
-  type: SingleRunSwingUI
-
 # Link nodes that are closer than 5 distance units
 network-model:
   type: ConnectWithinDistance
