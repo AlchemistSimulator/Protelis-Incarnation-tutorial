@@ -3,9 +3,9 @@ import io.kotest.matchers.collections.beEmpty
 import io.kotest.matchers.file.shouldHaveExtension
 import io.kotest.matchers.shouldNot
 import it.unibo.alchemist.boundary.LoadAlchemist
-import it.unibo.alchemist.core.Engine
 import it.unibo.alchemist.core.Status
 import it.unibo.alchemist.model.positions.Euclidean2DPosition
+import it.unibo.alchemist.model.terminators.AfterTime
 import it.unibo.alchemist.model.times.DoubleTime
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -23,9 +23,9 @@ class RunSimulationTest<T : Any?> : StringSpec(
         "simulations should terminate with no error" {
             listOfSimulationPaths
                 .asSequence()
-                .map { LoadAlchemist.from(it).getDefault<T, Euclidean2DPosition>().environment }
-                .map { Engine(it, DoubleTime(simulationTime)) }
+                .map { LoadAlchemist.from(it).getDefault<T, Euclidean2DPosition>() }
                 .onEach {
+                    it.environment.addTerminator(AfterTime(DoubleTime(simulationTime)))
                     it.play()
                     it.run()
                 }
