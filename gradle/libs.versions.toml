@@ -20,6 +20,6 @@ alchemist = [
 ]
 
 [plugins]
-kotlin-jvm = "org.jetbrains.kotlin.jvm:2.0.20"
+kotlin-jvm = "org.jetbrains.kotlin.jvm:2.0.21"
 multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:1.2.8"
 taskTree = "com.dorongold.task-tree:4.0.0"
