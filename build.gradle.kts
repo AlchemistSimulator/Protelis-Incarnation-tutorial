@@ -1,5 +1,3 @@
-import org.gradle.configurationcache.extensions.capitalized
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting)
@@ -47,24 +45,25 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
     .apply { check(isNotEmpty()) }
     .filter { it.extension == "yml" }
     .sortedBy { it.nameWithoutExtension }
-    .forEach {
-        val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalized()}") {
+    .forEach { simulationFile ->
+        val simulationName = simulationFile.nameWithoutExtension
+        val task by tasks.register<JavaExec>("run${simulationName.replaceFirstChar { it.uppercase() } }") {
             javaLauncher.set(
                 javaToolchains.launcherFor {
                     languageVersion.set(JavaLanguageVersion.of(multiJvm.latestJava))
                 }
             )
             group = alchemistGroup
-            description = "Launches simulation ${it.nameWithoutExtension}"
+            description = "Launches simulation $simulationName"
             mainClass.set("it.unibo.alchemist.Alchemist")
             classpath = sourceSets["main"].runtimeClasspath
-            val exportsDir = File("${projectDir.path}/build/exports/${it.nameWithoutExtension}")
+            val exportsDir = File("${projectDir.path}/build/exports/${simulationName}")
             doFirst {
                 if (!exportsDir.exists()) {
                     exportsDir.mkdirs()
                 }
             }
-            args("run", it.absolutePath)
+            args("run", simulationFile)
             if (System.getenv("CI") == "true" || batch == "true") {
                 args(
                     "--override",
@@ -77,7 +76,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             } else {
                 args(
                     "--override",
-                    "{ monitors: { type: SwingGUI, parameters: { graphics: \"effects/${it.nameWithoutExtension}.json\" } } }"
+                    "{ monitors: { type: SwingGUI, parameters: { graphics: \"effects/${simulationName}.json\" } } }"
                 )
             }
             outputs.dir(exportsDir)
