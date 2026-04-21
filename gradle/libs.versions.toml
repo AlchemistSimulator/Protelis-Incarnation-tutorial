@@ -1,5 +1,5 @@
 [versions]
-alchemist = "43.0.39"
+alchemist = "43.0.40"
 kotest = "6.1.11"
 
 [libraries]
